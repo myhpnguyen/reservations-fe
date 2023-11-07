@@ -18,21 +18,21 @@
             <div class="col col-12 col-sm-10 col-md-10">
                 <div class="card-group">
                 <div class="card">
-                  <img :src="require('@/assets/menu.jpeg')" class="card-img-top" style="height: 15rem">
+                  <img :src="require('@/assets/menu.png')" class="card-img-top" style="height: 15rem">
                   <div class="card-body">
                     <h5 class="card-title">Menu</h5>
-                    <a @click="viewCustomers" class="btn btn-primary">Show Menu</a>
+                    <a @click="Menu" class="btn btn-primary">Show Menu</a>
                   </div>
                 </div>
                 <div class="card">
-                  <img :src="require('@/assets/photos.jpeg')" class="card-img-top" style="height: 15rem">
+                  <img :src="require('@/assets/pulled_pork.jpeg')" class="card-img-top" style="height: 15rem">
                   <div class="card-body">
                     <h5 class="card-title">Photos</h5>
                     <a @click="viewInvestments" class="btn btn-primary">Show Photos</a>
                   </div>
                 </div>
                 <div class="card">
-                  <img :src="require('@/assets/reservation.png')" class="card-img-top" style="height: 15rem">
+                  <img :src="require('@/assets/book_reservation.png')" class="card-img-top" style="height: 15rem">
                   <div class="card-body">
                     <h5 class="card-title">Reserve</h5>
                     <a @click="viewStocks" class="btn btn-primary">Make Reservation</a>
@@ -64,15 +64,15 @@ export default {
       this.getUser();
     },
     methods: {
-      viewCustomers() {
-        router.push('/customer-list');
-      },
-      viewInvestments() {
-        router.push('/customer-list');
-      },
-      viewStocks() {
-        router.push('/customer-list');
-      },
+      // viewCustomers() {
+      //   router.push('/customer-list');
+      // },
+      // viewInvestments() {
+      //   router.push('/customer-list');
+      // },
+      // viewStocks() {
+      //   router.push('/customer-list');
+      // },
       getUser() {
         if (localStorage.getItem("isAuthenticated")
           && JSON.parse(localStorage.getItem("isAuthenticated")) === true) {

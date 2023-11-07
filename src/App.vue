@@ -1,107 +1,124 @@
 <template>
-  <header>
-    <nav>
-        <!-- Secondary Navigation inside <header> -->
-              <div class="topnav">
-                <a href="#home">Smokey's Barbeque </a>
-                <button class="button-split" href="#login">Login/Register</button>
-                <button class="button-split" href="#reserve">Reserve</button>
-                <button class="button-split" href="#menu">Menu</button>
-                <button class="button-split" href="#home">Home</button>
-            </div>
-    </nav>
-</header>
-  <div class="logo"></div>
-  <!-- <img class="logo" :src="require('@/assets/logo.png')" style="display:block; margin-left: auto; margin-right: auto;"> -->
-
-<div class="button-container">
-  <!-- <button class="button">Menu</button> -->
-  <a class="button" href="path-to-your-pdf.pdf" target="_blank">Menu</a>
-  <button class="button">Photos</button>
-  <button class="button">Reviews</button>
-</div>
-
-<!-- <img :src="require('@/assets/smokeys_menu.png')" class="card-img-top"> -->
-
+  <ul class="nav justify-content-end">
+     <div class="SB"><emp>Smokey's Barbeque </emp></div>
+     <li class="nav-item active">
+         <router-link to="/">Home</router-link> |
+     </li>
+     <li class="nav-item">
+         <router-link :to="{name: 'Menu'}">Menu</router-link> |
+     </li>
+     <li class="nav-item" v-if="!authenticated" @click="register" >
+         <router-link :to="{name: 'Register'}">Register</router-link> |
+     </li>
+     <li class="nav-item" v-if="!authenticated" @click="login" >
+         <router-link :to="{name: 'Auth'}">Log in</router-link>
+     </li>
+     <li class="nav-item  .justify-content-end" v-if="authenticated" @click="logout" >
+         <router-link :to="{name: 'Auth'}">Logout</router-link>
+     </li>
+ </ul>
+ <router-view/>
 </template>
+<script>
+ import router from './router';
+ import {APIService} from './http/APIService';
+ const apiService = new APIService();
 
-<style>
-/* Create a top navigation bar with a black background color  */
-.topnav {
-  background-color: #333;
-  overflow: hidden;
+ export default {
+     name: 'App',
+     data: () => ({
+         authenticated: false,
+         dialog: false,
+         menu: [
+             { title: 'Home', url:"/"},
+             { title: 'Menu', url:"/menu" },
+         ]
+     }),
+     mounted() {
+       if (localStorage.getItem("isAuthenticated") &&
+           JSON.parse(localStorage.getItem("isAuthenticated")) === true ){
+           this.authenticated = true
+       }else {
+           this.authenticated = false
+       }
+       if(this.authenticated === true) {
+         apiService.getCustomerList().then(response => {
+             this.authenticated = true;
+         }).catch(error => {
+             if (error.response.status === 401) {
+               localStorage.clear();
+               localStorage.setItem("isAuthenticated", false);
+               this.authenticated = false;
+             }
+         });
+       } 
+     },
+     methods: {
+       getUser() {
+           if (localStorage.getItem("isAuthenticated") &&
+            JSON.parse(localStorage.getItem("isAuthenticated")) === true
+           ) {
+            this.validUserName = JSON.parse(localStorage.getItem("log_user"));
+            } 
+       },
+         logout() {
+           //clear local storage items and set authenticated to false
+           localStorage.clear();
+           localStorage.setItem("isAuthenticated", false);
+           this.authenticated = false;
+           window.location = "/";
+         },
+         login() {
+             router.push("/auth");
+         },
+         home() {
+           window.location = "/";
+           },
+       register() {
+           router.push("/register");
+       }
+   }
 }
+</script>
+<style lang="scss">
+ #app {
+     font-family: Avenir, Helvetica, Arial, sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     text-align: center;
+     color: black;
+ }
+ #nav {
+     padding: 30px;
+     background-color: #442027;
+     a {
+         font-weight: bold;
+         color: #FFF4C3;
+         &.router-link-exact-active {
+             color: #FFF4C3;
+         }
+     }
+ }
+ .nav {
+     padding: 1em;
+     background-color: #442027;
+     
+     li {
+         font-weight: bold;
+         color: #FFF4C3;
+     }
+     a {
+         color: #FFF4C3;
+         padding: .5em;
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Create a right-aligned (split) link inside the navigation bar */
-/* .topnav a.split {
-  float: right;
-  background-color: #aa3904;
-  color: white;
-} */
-
-.logo {
-  width: 100%;
-  height: 0;
-  padding-bottom: 30%;
-  background-image: url('@/assets/logo2.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.button-container {
-  text-align: center; 
-  margin-top: 20px; 
-}
-
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color:#aa3904;
-;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  margin: 5px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.button-split {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color:#aa3904;
-;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  margin: 5px;
-  text-decoration: none;
-  cursor: pointer;
-  background-color: #aa3904;
-  color: white;
-  float: right;
-}
-
-.card-img-top {
-  height: fit-content;
-  width: fit-content;
-}
-
+         &.router-link-exact-active {
+             color: #FFF4C3;
+         }
+     }
+     .SB{
+         margin-right: 45em;
+         font-size: medium;
+         color: #FFF4C3
+     }
+ }
 </style>

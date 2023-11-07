@@ -1,56 +1,51 @@
-import axios from 'axios';
-// Change the API_URL to the correct location of the backend API before deploying the app
-const API_URL = 'http://127.0.0.1:8000/'; /* 'http://localhost:8000' http://127.0.0.1:8000/ or  'http://yourPythonAnywhereName.pythonanywhere.com/'*/
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '@/components/Home.vue'
+import Auth from '@/components/Auth.vue'
+import Register from '@/components/Register'
+import Menu from '@/components/Menu'
+import CustomerCreate from '@/components/CustomerCreate'
 
-  export class APIService {
-    constructor() {
-      }
-     getCustomer(param_pk) {
-       const url = `${API_URL}/api/customers/${param_pk}`;
-       let jwtToken = localStorage.getItem('access');
-       const headers = {Authorization: `JWT ${jwtToken}`};
-       return axios.get(url,  {headers: headers});
-    }
-  
-     getCustomerList() {
-      const url = `${API_URL}/api/customers/`;
-      let jwtToken = localStorage.getItem('access');
-      const headers = {Authorization: `JWT ${jwtToken}`};
-      return axios.get(url,  {headers: headers});
-    }
-  
-    addNewCustomer(customer){
-     const url = `${API_URL}/api/customers/`;
-     let jwtToken = localStorage.getItem('access');
-     const headers = {Authorization: `JWT ${jwtToken}`};
-     return axios.post(url, customer, {headers: headers});
-    }
-  
-    updateCustomer(customer){
-      const url = `${API_URL}/api/customers/${customer.pk}`;
-      let jwtToken = localStorage.getItem('access');
-      const headers = {Authorization: `JWT ${jwtToken}`};
-       return axios.put(url, customer, {headers: headers});
-    }
-  
-    deleteCustomer(customer_Pk){
-       const url = `${API_URL}/api/customers/${customer_Pk}`;
-       let jwtToken = localStorage.getItem('access');
-       const headers = {Authorization: `JWT ${jwtToken}`};
-       return axios.delete(url, {headers: headers});
-    }
-  
-    authenticateLogin(credentials) {
-      const url = `${API_URL}/api/`;
-      return axios.post(url, credentials);
-    }
-  
-   registerUser(credentials) {
-      const url = `${API_URL}/register/`;
-      credentials.customusername = credentials.username
-      return axios.post(url, credentials);
-    }
-  
-  }
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/menu',
+    name: 'Menu',
+    component: Menu
+  },
+  // {
+  //   path: '/customer-list/:msg',
+  //   name: 'CustomerUpdatedList',
+  //   component: CustomerList
+  // },
+  {
+    path: '/customer-create',
+    name: 'CustomerCreate',
+    component: CustomerCreate
+  },
+  {
+    path: '/customer-create/:pk',
+    name: 'CustomerUpdate',
+    component: CustomerCreate
+  },
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: Auth
+  },
+  {
+    path:'/register',
+    name: 'Register',
+    component: Register
+  } 
+]
 
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
 
+export default router
