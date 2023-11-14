@@ -27,8 +27,8 @@
                 <div class="card">
                   <img :src="require('@/assets/pulled_pork.jpeg')" class="card-img-top" style="height: 15rem">
                   <div class="card-body">
-                    <h5 class="card-title">Create A Review</h5>
-                    <a @click="Reviews" class="btn btn-primary">Create A Review</a>
+                    <h5 class="card-title">Leave A Review</h5>
+                    <a @click="Reviews" class="btn btn-primary">Leave A Review</a>
                   </div>
                 </div>
                 <div class="card">
