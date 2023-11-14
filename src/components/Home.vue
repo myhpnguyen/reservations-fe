@@ -65,16 +65,20 @@ export default {
       this.getUser();
     },
     methods: {
-      Menu() {
-            router.push({ name: 'Menu' });
-        },
-        Reviews() {
-            router.push({ name: 'Reviews' });
-        },
-        Reserve() {
-            // Placeholder - replace '/reserve' with the actual path when available
-            router.push('/reserve');
-        },
+    Menu() {
+      router.push({ name: 'Menu' });
+    },
+    Reviews() {
+      if (this.authenticated) {
+        router.push({ name: 'Reviews' }); // Assuming 'Reviews' is the name of your review page route
+      } else {
+        router.push({ name: 'Register' }); // Redirect to Register page
+      }
+    },
+    Reserve() {
+      // Placeholder - replace '/reserve' with the actual path when available
+      router.push('/reserve');
+    },
         getUser() {
           if (localStorage.getItem("isAuthenticated") &&
               JSON.parse(localStorage.getItem("isAuthenticated")) === true) {

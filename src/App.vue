@@ -7,7 +7,7 @@
      <li class="nav-item">
          <router-link :to="{name: 'Menu'}">Menu</router-link> |
      </li>
-     <li class="nav-item">
+     <li class="nav-item" v-if="!authenticated" @click="register">
       <router-link :to="{name: 'ReviewsList'}">Reviews</router-link> |
     </li>
      <!-- <li class="nav-item">
@@ -38,6 +38,7 @@
          menu: [
              { title: 'Home', url:"/"},
              { title: 'Menu', url:"/menu" },
+             { title: 'Reviews', url:"/reviews"},
          ]
      }),
      mounted() {
@@ -82,9 +83,10 @@
            },
        register() {
            router.push("/register");
+       },
        }
    }
-}
+
 </script>
 <style lang="scss">
  #app {
