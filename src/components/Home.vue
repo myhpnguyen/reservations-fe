@@ -27,15 +27,15 @@
                 <div class="card">
                   <img :src="require('@/assets/pulled_pork.jpeg')" class="card-img-top" style="height: 15rem">
                   <div class="card-body">
-                    <h5 class="card-title">Photos</h5>
-                    <a @click="viewInvestments" class="btn btn-primary">Show Photos</a>
+                    <h5 class="card-title">Create A Review</h5>
+                    <a @click="Reviews" class="btn btn-primary">Create A Review</a>
                   </div>
                 </div>
                 <div class="card">
                   <img :src="require('@/assets/book_reservation.png')" class="card-img-top" style="height: 15rem">
                   <div class="card-body">
                     <h5 class="card-title">Reserve</h5>
-                    <a @click="viewStocks" class="btn btn-primary">Make Reservation</a>
+                    <a @click="Reserve" class="btn btn-primary">Make Reservation</a>
                   </div>
                 </div>
               </div>
@@ -43,6 +43,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import router from '../router'
 export default {
@@ -64,22 +65,23 @@ export default {
       this.getUser();
     },
     methods: {
-      // viewCustomers() {
-      //   router.push('/customer-list');
-      // },
-      // viewInvestments() {
-      //   router.push('/customer-list');
-      // },
-      // viewStocks() {
-      //   router.push('/customer-list');
-      // },
-      getUser() {
-        if (localStorage.getItem("isAuthenticated")
-          && JSON.parse(localStorage.getItem("isAuthenticated")) === true) {
-          this.validUserName = JSON.parse(localStorage.getItem("log_user"));
-          this.authenticated = true;
+      Menu() {
+            router.push({ name: 'Menu' });
+        },
+        Reviews() {
+            router.push({ name: 'Reviews' });
+        },
+        Reserve() {
+            // Placeholder - replace '/reserve' with the actual path when available
+            router.push('/reserve');
+        },
+        getUser() {
+          if (localStorage.getItem("isAuthenticated") &&
+              JSON.parse(localStorage.getItem("isAuthenticated")) === true) {
+              this.validUserName = JSON.parse(localStorage.getItem("log_user"));
+              this.authenticated = true;
+            }
         }
-      }
     }
-  }
+};
 </script>

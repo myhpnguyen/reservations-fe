@@ -1,12 +1,18 @@
 <template>
   <ul class="nav justify-content-end">
-     <div class="SB"><emp>Smokey's Barbeque </emp></div>
+     <div class="SB">Smokey's Barbeque </div>
      <li class="nav-item active">
          <router-link to="/">Home</router-link> |
      </li>
      <li class="nav-item">
          <router-link :to="{name: 'Menu'}">Menu</router-link> |
      </li>
+     <li class="nav-item">
+      <router-link :to="{name: 'ReviewsList'}">Reviews</router-link> |
+    </li>
+     <!-- <li class="nav-item">
+         <router-link :to="{name: 'Reserve'}">Reserve</router-link> |
+     </li> -->
      <li class="nav-item" v-if="!authenticated" @click="register" >
          <router-link :to="{name: 'Register'}">Register</router-link> |
      </li>

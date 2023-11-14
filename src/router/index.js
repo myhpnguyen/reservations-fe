@@ -3,6 +3,8 @@ import Home from '@/components/Home.vue'
 import Auth from '@/components/Auth.vue'
 import Register from '@/components/Register'
 import Menu from '@/components/Menu'
+import Reviews from '@/components/Reviews.vue'
+import ReviewsList from '@/components/ReviewsList.vue'
 import CustomerCreate from '@/components/CustomerCreate'
 
 const routes = [
@@ -40,7 +42,17 @@ const routes = [
     path:'/register',
     name: 'Register',
     component: Register
-  } 
+  },
+  {
+    path:'/reviews',
+    name: "Reviews",
+    component: Reviews
+  },
+  {
+    path:'/reviews-list',
+    name: 'ReviewsList',
+    component: ReviewsList
+  }
 ]
 
 const router = createRouter({
