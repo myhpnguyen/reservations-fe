@@ -5,7 +5,9 @@ import Register from '@/components/Register'
 import Menu from '@/components/Menu'
 import Reviews from '@/components/Reviews.vue'
 import ReviewsList from '@/components/ReviewsList.vue'
+import Reserve from '@/components/Reserve.vue';
 import CustomerCreate from '@/components/CustomerCreate'
+
 
 const routes = [
   {
@@ -52,6 +54,11 @@ const routes = [
     path:'/reviews-list',
     name: 'ReviewsList',
     component: ReviewsList
+  },
+  {
+    path:'/reserve',
+    name: 'Reserve',
+    component: Reserve
   }
 ]
 

@@ -7,12 +7,12 @@
      <li class="nav-item">
          <router-link :to="{name: 'Menu'}">Menu</router-link> |
      </li>
-     <li class="nav-item" v-if="!authenticated" @click="register">
+     <li class="nav-item">
       <router-link :to="{name: 'ReviewsList'}">Reviews</router-link> |
     </li>
-     <!-- <li class="nav-item">
+     <li class="nav-item">
          <router-link :to="{name: 'Reserve'}">Reserve</router-link> |
-     </li> -->
+     </li>
      <li class="nav-item" v-if="!authenticated" @click="register" >
          <router-link :to="{name: 'Register'}">Register</router-link> |
      </li>
@@ -95,6 +95,7 @@
      -moz-osx-font-smoothing: grayscale;
      text-align: center;
      color: black;
+    //  background-image: ;
  }
  #nav {
      padding: 30px;

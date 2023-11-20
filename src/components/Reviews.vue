@@ -26,17 +26,17 @@
         <label for="visitedDate" class="form-label">Visited Date</label>
         <input type="date" class="form-control" id="visitedDate" v-model="visitedDate" required>
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="imageUpload" class="form-label">Upload Image</label>
         <input type="file" class="form-control" id="imageUpload" @change="onFileChange">
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-primary">Submit Review</button>
     </form>
     <!-- Preview section -->
-    <div v-if="imageUrl">
+    <!-- <div v-if="imageUrl">
       <h3>Image Preview:</h3>
       <img :src="imageUrl" class="img-fluid" alt="Preview" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
       mealPrice: null,
       visitedDate: '',
       imageFile: null,
-      imageUrl: null
+      // imageUrl: null
     };
   },
   methods: {
@@ -63,6 +63,7 @@ export default {
       this.imageUrl = URL.createObjectURL(file);
     },
     async submitReview() {
+      try {
       // Prepare form data
       const formData = new FormData();
       formData.append('menu_item', this.menuItem);
@@ -71,13 +72,19 @@ export default {
       formData.append('description', this.description);
       formData.append('meal_price', this.mealPrice);
       formData.append('visited_date', this.visitedDate);
+      const response = await axios.post('/api/reviews', formData);
+      alert('Review submitted successfully!');
+        // ... reset form ...
+      } catch (error) {
+      console.error('Error submitting review:', error);
+      alert('Error submitting review.');
       if (this.imageFile) {
         formData.append('image', this.imageFile);
       }
-
+      
       // Submit to your server (example endpoint: '/api/reviews')
       try {
-        await this.$http.post('/api/reviews', formData);
+        await this.$http.post('/api/reviews/', formData);
         alert('Review submitted successfully!');
         // Reset form
         this.menuItem = '';
@@ -87,13 +94,14 @@ export default {
         this.mealPrice = null;
         this.visitedDate = '';
         this.imageFile = null;
-        this.imageUrl = null;
+        // this.imageUrl = null;
       } catch (error) {
         console.error('Error submitting review:', error);
         alert('Error submitting review.');
       }
     }
   }
+}
+
 };
 </script>
-
