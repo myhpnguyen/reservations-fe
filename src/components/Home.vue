@@ -20,7 +20,7 @@
             <img :src="require('@/assets/pulled_pork.jpeg')" class="card-img-top" style="height: 15rem">
             <div class="card-body">
               <h5 class="card-title">Leave A Review</h5>
-              <a @click="Reviews" class="btn btn-primary">Leave A Review</a>
+              <a @click="ReviewsList" class="btn btn-primary">Leave A Review</a>
             </div>
           </div>
           <div class="card">
@@ -75,15 +75,6 @@
         <p>Delicious BBQ since 2023. <br>
           Visit us for an authentic taste of the grill!</p>
       </div>
-      <div class="footer-navigation">
-        <h3>Navigation</h3>
-        <ul>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/menu">Menu</a></li>
-          <li><a href="/reviews">Reviews</a></li>
-          <li><a href="/reserve">Reserve</a></li>
-        </ul>
-      </div>
       <div class="footer-contact">
         <h3>Contact Us</h3>
         <p>123 BBQ Town Omaha, NE</p>
@@ -118,16 +109,15 @@ export default {
     Menu() {
       router.push({ name: 'Menu' });
     },
-    Reviews() {
-      if (this.authenticated) {
-        router.push({ name: 'Reviews' }); // Assuming 'Reviews' is the name of your review page route
-      } else {
-        router.push({ name: 'Register' }); // Redirect to Register page
-      }
-      router.push({ name: 'Reviews' });
+    ReviewsList() {
+      // if (this.authenticated) {
+      //   router.push({ name: 'ReviewsList' }); 
+      // } else {
+      //   router.push({ name: 'Register' }); 
+      // }
+      router.push({ name: 'ReviewsList' });
     },
     Reserve() {
-      // Placeholder - replace '/reserve' with the actual path when available
       router.push('/reserve');
     },
     getUser() {
