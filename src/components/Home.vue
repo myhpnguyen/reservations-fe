@@ -3,8 +3,6 @@
   <div class="container-fluid">
     <div class="row1">
       <!-- Welcome {{ validUserName }}! -->
-            <!-- Testing -->
-
     </div>
   </div>
   <div class="container-fluid">
